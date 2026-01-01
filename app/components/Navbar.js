@@ -87,23 +87,26 @@ const [mobileGuideOpen, setMobileGuideOpen] = useState(false);
   <li><Link href="/my-dog">My Dog</Link></li>
 </ul>
 
-       <div className="nav-avatar nav-right " onClick={() => setAvatarOpen(true)}>
-  {profilePic ? (
-    <img 
-      src={`${profilePic}?t=${Date.now()}`}  // Cache bust
-      alt="Profile"
-      className="w-10 h-10 rounded-full object-cover"
-      onError={(e) => {
-        e.target.style.display = 'none';
-        e.target.nextSibling.style.display = 'block';
-      }}
-    />
-  ) : (
-    <span className="nav-avatar-fallback flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full text-sm font-medium">
-      {profile?.full_name?.[0]?.toUpperCase() || user?.email?.[0]?.toUpperCase() || "?"}
-    </span>
-  )}
-</div>
+       {user ? (
+  <div className="nav-avatar" onClick={() => setAvatarOpen(true)}>
+    {profilePic ? (
+      <img src={profilePic} alt="Profile" key={profilePic} />
+    ) : (
+      <span className="nav-avatar-fallback">
+        {username?.[0]?.toUpperCase() ||
+          user?.email?.[0]?.toUpperCase() ||
+          "?"}
+      </span>
+    )}
+  </div>
+) : (
+  <div className="nav-right">
+    <Link href="/login" className="btn-primary">
+      Login
+    </Link>
+  </div>
+)}
+
 
       </nav>
       {/* AVATAR MODAL */}

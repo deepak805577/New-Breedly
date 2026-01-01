@@ -942,8 +942,8 @@ footer {
     top: 20;
   }
 
-  .nav-center,
-  .nav-right {
+  .nav-center
+ {
     display: none; /* hide desktop nav */
   }
 
